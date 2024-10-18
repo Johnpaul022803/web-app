@@ -1,90 +1,104 @@
+import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
-function AboutScreen() {
-    const navigation = useNavigation();
-
-    return (
-        <View style={styles.container}>
-            <ScrollView style={[styles.scrollView, {marginBottom: 100}]}>
-                <View style={styles.paragraphContainer}>
-                    <Image source={require('../assets/img1.jpg')} style={styles.image} />
-                    <Text style={styles.paragraph}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    </Text>
-                </View>
-                <View style={styles.paragraphContainer}>
-                    <Image source={require('../assets/img1.jpg')} style={styles.image} />
-                    <Text style={styles.paragraph}>
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                    </Text>
-                </View>
-                <View style={styles.paragraphContainer}>
-                    <Image source={require('../assets/img1.jpg')} style={styles.image} />
-                    <Text style={styles.paragraph}>
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magna aliqua.
-                    </Text>
-                </View>
-            </ScrollView>
-            <View style={styles.navContainer}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('HomeScreen')}>
-                    <Text style={styles.buttonText}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('LoginScreen')}>
-                    <Text style={styles.buttonText}>Logout</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    );
-}
+const AboutScreen = () => {
+  const navigation = useNavigation();
+  
+  const handleMulti = () => {
+    navigation.navigate("MULTI"); 
+  };
+  const handleDivi = () => {
+      navigation.navigate("DIVI"); 
+  };
+  const handleAddi = () => {
+    navigation.navigate("ADDI"); 
+  };
+  const handleSub = () => {
+    navigation.navigate("SUB");
+    };
+  return (
+    <LinearGradient colors={['#a8e063', '#56ab2f']} style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Learn Math Today</Text>
+      </View>
+      <Text style={styles.lessonsTitle}>LESSONS</Text>
+      <TouchableOpacity 
+        style={[styles.button, styles.multiplication]} 
+        onPress={handleMulti} >
+        <Text style={styles.buttonText}>MULTIPLICATION</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, styles.division]}
+      onPress={handleDivi} >
+        <Text style={styles.buttonText}>DIVISION</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, styles.addition]}
+      onPress={handleAddi}>
+        <Text style={styles.buttonText}>ADDITION</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, styles.subtraction]}
+      onPress={handleSub}>
+        <Text style={styles.buttonText}>SUBTRACTION</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, styles.countingNumbers]}>
+        <Text style={styles.buttonText}>COUNTING NUMBERS</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, styles.guessShape]}>
+        <Text style={styles.buttonText}>GUESS THE SHAPE</Text>
+      </TouchableOpacity>
+    </LinearGradient>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#786c3b',
-    },
-    itemContainer: {
-        flex: 1,
-    },
-    navContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        padding: 10,
-        backgroundColor: '#2c786c',
-    },
-    button: {
-        backgroundColor: '#33cccc',
-        padding: 20,
-        borderRadius: 10,
-        marginBottom: 10,
-        marginHorizontal: 10,
-        width: 100,
-    },
-    buttonText: {
-        textAlign: "center",
-    },
-    image: {
-        width: '100%',
-        height: 200,
-    },
-    paragraphContainer: {
-        padding: 20,
-        backgroundColor: '#996600',
-        marginBottom: 20,
-    },
-    paragraph: {
-        fontSize: 18,
-        color: '#fff',
-    },
-    scrollView: {
-        padding: 20,
-    },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  lessonsTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  button: {
+    width: 200,
+    padding: 15,
+    borderRadius: 25,
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  multiplication: {
+    backgroundColor: '#ff6347',
+  },
+  division: {
+    backgroundColor: '#fafad2',
+  },
+  addition: {
+    backgroundColor: '#ffb6c1',
+  },
+  subtraction: {
+    backgroundColor: '#f0e68c',
+  },
+  countingNumbers: {
+    backgroundColor: '#b19cd9',
+  },
+  guessShape: {
+    backgroundColor: '#f4a460',
+  },
 });
 
 export default AboutScreen;
