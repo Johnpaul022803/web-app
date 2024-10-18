@@ -1,93 +1,118 @@
+import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Image} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
-  
-function HomeScreen() {
+
+export default function App() {
     const navigation = useNavigation();
-    
+
+    const handleSignIn = () => {
+        // Here you would typically handle the sign-in logic (e.g., API call)
+        console.log("Create Account button pressed");
+        navigation.navigate("ABOUT"); // Navigate to About screen after creating account
+    };
+
+    const handleSignUp = () => {
+        navigation.navigate("HOME"); // Navigate to Home screen
+    };
+
     return (
-        <View style={styles.container}>
-            <ScrollView style={[styles.scrollView, {marginBottom: 100}]}>
-                <View style={styles.paragraphContainer}>
-                    <Image source={require('../assets/img1.jpg')} style={styles.image} />
-                    <Text style={styles.paragraph}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    </Text>
+        <LinearGradient colors={['#8BD68E', '#28D039']} style={styles.container}>
+            <View style={styles.headerContainer}>
+                <Text style={styles.title}>KUMON nahLEDGE</Text>
+                <Image
+                    source={require('../assets/favicon.png')} // Ensure the path to your logo is correct
+                    style={styles.logo}
+                />
+                <Text style={styles.subtitle}>Learn Math Today</Text>
+            </View>
+            <View style={styles.formContainer}>
+                <Text style={styles.signInText}>Create New Account</Text>
+                <View style={styles.inputGroup}>
+                    <InputField label="Full Name" placeholder="John Doe" />
+                    <InputField label="Email Address" placeholder="learnmath221@gmail.com" />
+                    <InputField label="Password" placeholder="***************" secureTextEntry={true} />
                 </View>
-                <View style={styles.paragraphContainer}>
-                    <Image source={require('../assets/img1.jpg')} style={styles.image} />
-                    <Text style={styles.paragraph}>
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                    </Text>
-                </View>
-                <View style={styles.paragraphContainer}>
-                    <Image source={require('../assets/img1.jpg')} style={styles.image} />
-                    <Text style={styles.paragraph}>
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magna aliqua.
-                    </Text>
-                </View>
-            </ScrollView>
-            <View style={styles.navContainer}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AboutScreen')}>
-                    <Text style={styles.buttonText}>About</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('LoginScreen')}>
-                    <Text style={styles.buttonText}>Logout</Text>
+                <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+                    <Text style={styles.buttonText}>Create Account</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </LinearGradient>
     );
 }
+
+const InputField = ({ label, placeholder, secureTextEntry }) => (
+    <View style={styles.inputWrapper}>
+        <Text>{label}</Text>
+        <TextInput
+            style={styles.input}
+            placeholder={placeholder}
+            secureTextEntry={secureTextEntry}
+        />
+    </View>
+);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#786c3b',
+        padding: 50,
+        gap: 50,
     },
-    itemContainer: {
-        flex: 1,
+    headerContainer: {
+        height: 200, // Set a fixed height for the header
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center', // Center content horizontally
+        gap: 20, // Reduced gap for a more compact look
     },
-    navContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
+    title: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#fff',
+        marginTop: 30,
+    },
+    logo: {
+        height: 100, // Reduced logo height
+        width: 100, // Reduced logo width
+    },
+    subtitle: {
+        color: '#000000',
+        textAlign: 'center',
+        fontSize: 40,
+        gap: 1,
+        fontStyle: 'italic',
+    },
+    formContainer: {
+        marginTop: 20, // Adjusted margin for form container
+    },
+    signInText: {
+        fontSize: 30, // Reduced font size for a more compact look
+        fontWeight: '700',
+        textAlign: 'center',
+        fontStyle: 'italic',
+    },
+    inputGroup: {
+        gap: 12,
+        marginTop: 12,
+        fontSize: 12,
+    },
+    inputWrapper: {
+        gap: 6,
+    },
+    input: {
         padding: 10,
-        backgroundColor: '#2c786c',
+        borderRadius: 50,
+        backgroundColor: '#fff',
     },
     button: {
-        backgroundColor: '#33cccc',
-        padding: 20,
-        borderRadius: 10,
-        marginBottom: 10,
-        marginHorizontal: 10,
-        width: 100,
+        backgroundColor: '#0021F8', // Change this to your preferred button color
+        borderRadius: 50,
+        paddingVertical: 15,
+        marginTop: 20,
+        alignItems: 'center',
     },
     buttonText: {
-        textAlign: "center",
-    },
-    image: {
-        width: '100%',
-        height: 200,
-    },
-    paragraphContainer: {
-        padding: 20,
-        backgroundColor: '#996600',
-        marginBottom: 20,
-    },
-    paragraph: {
-        fontSize: 18,
         color: '#fff',
-        marginBottom: 20,
-    },
-    scrollView: {
-        padding: 20,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 });
-
-
-export default HomeScreen;
-
